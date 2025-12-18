@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const apiClient = axios.create({
-  baseURL: 'https://etf-service-th2v.onrender.com', // Python Backend URL
+  baseURL: 'http://etf-service-th2v.onrender.com',
   headers: {
     'Content-Type': 'application/json',
   },

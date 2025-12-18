@@ -1,7 +1,7 @@
 import { apiClient } from "@/api/client";
 import { ETFResponseDTO } from "../types/api";
 import { mapDTOtoModel } from "../utils/mappers";
-import { ETFAnalysis } from "../types";
+import { ETFAnalysis } from "../types/models";
 
 export const analyzeETF = async (file: File): Promise<ETFAnalysis> => {
   const formData = new FormData();
@@ -12,14 +12,6 @@ export const analyzeETF = async (file: File): Promise<ETFAnalysis> => {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 
-  // Log raw backend response
-  console.log('📥 Raw backend response:', JSON.stringify(dto, null, 2));
-
   // 2. Map DTO to Domain Model
-  const mappedData = mapDTOtoModel(dto);
-  
-  // Log mapped result
-  console.log('🔄 Mapped domain model:', mappedData);
-  
-  return mappedData;
+  return mapDTOtoModel(dto);
 };

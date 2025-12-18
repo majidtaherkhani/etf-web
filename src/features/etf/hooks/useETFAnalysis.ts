@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { analyzeETF } from '../api/etfService';
-import { ETFAnalysis } from '../types';
+import { ETFAnalysis } from '../types/models';
 
 export const useETFAnalysis = () => {
   const [data, setData] = useState<ETFAnalysis | null>(null);
@@ -11,13 +11,17 @@ export const useETFAnalysis = () => {
     setLoading(true);
     setError(null);
     try {
-      console.log('🚀 Starting ETF analysis for file:', file.name, `(${(file.size / 1024).toFixed(2)} KB)`);
       const result = await analyzeETF(file);
-      console.log('✅ ETF analysis successful:', result);
       setData(result);
-    } catch (err) {
+    } catch (err: any) {
       console.error('❌ ETF analysis failed:', err);
-      setError("Failed to process ETF. Please ensure the CSV format is correct.");
+      // Extract error message from various possible error formats
+      const errorMessage = 
+        err?.response?.data?.message || 
+        err?.response?.data?.detail || 
+        err?.message || 
+        "Failed to process ETF. Please ensure the CSV format is correct.";
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
