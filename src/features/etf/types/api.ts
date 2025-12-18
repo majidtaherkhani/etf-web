@@ -2,11 +2,13 @@
 export interface LatestPriceDTO {
   ticker: string;
   price: number;
+  weight: number;
+  value: number;
 }
 
 export interface TimeSeriesPointDTO {
   date: string;
-  price: number;
+  nav: number; // Net Asset Value
 }
 
 export interface ETFResponseDTO {
