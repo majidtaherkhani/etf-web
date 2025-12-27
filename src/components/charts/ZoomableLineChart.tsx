@@ -1,9 +1,9 @@
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Brush, CartesianGrid } from 'recharts';
 import { Card } from '../ui/Card';
 
-export const ZoomableLineChart = ({ data }: { data: any[] }) => (
+export const ZoomableLineChart = ({ data, title }: { data: any[]; title?: string }) => (
   <Card className="h-[450px] p-6">
-    <h3 className="text-lg font-bold mb-4 text-gray-800 text-center">Historical Net Asset Value</h3>
+    {title && <h3 className="text-lg font-bold mb-4 text-gray-800 text-center">{title}</h3>}
     <ResponsiveContainer width="100%" height="85%">
       <LineChart data={data}>
         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
