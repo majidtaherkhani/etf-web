@@ -32,5 +32,5 @@ export const useETFAnalysis = () => {
     setError(null);
   };
 
-  return { data, loading, error, uploadAndAnalyze, reset };
+  return { data, loading, error, setError, uploadAndAnalyze, reset };
 };

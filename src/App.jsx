@@ -3,7 +3,7 @@ import { UploadSection } from './features/etf/components/UploadSection';
 import { DashboardView } from './features/etf/components/DashboardView';
 
 function App() {
-  const { data, loading, error, uploadAndAnalyze, reset } = useETFAnalysis();
+  const { data, loading, error, setError, uploadAndAnalyze, reset } = useETFAnalysis();
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 font-sans">
@@ -19,7 +19,11 @@ function App() {
 
         {/* Main Route Logic */}
         {!data ? (
-          <UploadSection onUpload={uploadAndAnalyze} isLoading={loading} />
+          <UploadSection 
+            onUpload={uploadAndAnalyze} 
+            isLoading={loading} 
+            onError={setError} 
+          />
         ) : (
           <DashboardView data={data} onReset={reset} />
         )}

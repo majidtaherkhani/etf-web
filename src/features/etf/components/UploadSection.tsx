@@ -4,9 +4,10 @@ import { Spinner } from "@/components/ui/Spinner";
 interface Props {
   onUpload: (file: File) => void;
   isLoading: boolean;
+  onError: (message: string) => void;
 }
 
-export const UploadSection = ({ onUpload, isLoading }: Props) => {
+export const UploadSection = ({ onUpload, isLoading, onError }: Props) => {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center py-20 animate-in fade-in duration-500">
@@ -23,7 +24,13 @@ export const UploadSection = ({ onUpload, isLoading }: Props) => {
         <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">ETF Analyzer</h1>
         <p className="text-gray-500 text-lg">Upload a weights CSV to visualize historical performance.</p>
       </div>
-      <FileUpload onFileSelect={onUpload} label="Drag & drop your ETF CSV here" />
+      <FileUpload 
+        onFileSelect={onUpload} 
+        label="Drag & drop your ETF CSV here" 
+        accept=".csv"
+        helperText="Supports .csv files only"
+        onError={onError}
+      />
     </div>
   );
 };
