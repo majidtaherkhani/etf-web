@@ -34,7 +34,13 @@ export const DashboardView = ({ data, onReset }: Props) => {
       </div>
 
       {/* Main Chart */}
-      <ZoomableLineChart data={data.history} title="Historical Net Asset Value" />
+      <ZoomableLineChart 
+        data={data.history} 
+        title="Historical Net Asset Value" 
+        xAxisKey="date"
+        yAxisKey="nav"
+        xAxisFormatter={(value) => value.split(/[T ]/)[0]}
+      />
 
       {/* Grid Layout for Bottom Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
